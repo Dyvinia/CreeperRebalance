@@ -13,11 +13,15 @@ public class Config {
             .comment("\n Prevents creeper explosions from breaking blocks. \n Default: true")
             .define("disableGriefing", true);
     private static final ForgeConfigSpec.ConfigValue<Double> KNOCKBACK_MULT = BUILDER
-            .comment("\n Multiplier for extra knockback caused by the explosion.\n Set to 0.0 for vanilla behavior.\n Default: 3.0")
-            .define("knockbackMult", 3.0);
+            .comment("\n Multiplier for extra knockback caused by the explosion.\n Set to 0.0 for vanilla behavior.\n Default: 4.0")
+            .define("knockbackMult", 4.0);
     private static final ForgeConfigSpec.ConfigValue<Double> PLAYER_KNOCKBACK_MULT = BUILDER
-            .comment("\n Multiplier for extra knockback caused by the explosion to players.\n Set to -1.0 to default to the value of knockbackMult.\n Default: 2.0")
-            .define("playerKnockbackMult", 2.0);
+            .comment("\n Multiplier for extra knockback caused by the explosion to players.\n Set to -1.0 to default to the value of knockbackMult.\n Default: 3.0")
+            .define("playerKnockbackMult", 3.0);
+
+    private static final ForgeConfigSpec.ConfigValue<Double> KNOCKBACK_UP = BUILDER
+            .comment("\n Adjusts the upward velocity added by the explosion as part of its knockback.\n Default: 0.1")
+            .define("knockbackUp", 0.1);
 
     private static final ForgeConfigSpec.ConfigValue<Double> FALLOFF_EXPONENT = BUILDER
             .comment("\n Exponent used for calculating the falloff.\n Default: 2.0")
@@ -26,6 +30,7 @@ public class Config {
     public static boolean disableGriefing;
     public static double knockbackMult;
     public static double playerKnockbackMult;
+    public static double knockbackUp;
     public static double falloffExponent;
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
@@ -35,6 +40,7 @@ public class Config {
         disableGriefing = DISABLE_GRIEFING.get();
         knockbackMult = KNOCKBACK_MULT.get();
         playerKnockbackMult = PLAYER_KNOCKBACK_MULT.get();
+        knockbackUp = KNOCKBACK_UP.get();
         falloffExponent = FALLOFF_EXPONENT.get();
     }
 }

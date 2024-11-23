@@ -53,9 +53,8 @@ public class CreeperRebalance {
                         else
                             knockback *= Config.knockbackMult;
 
-                        Vec3 direction = entity.position().subtract(creeper.position());
-                        direction.normalize();
-                        Vec3 velocity = new Vec3(direction.x, 0.25f, direction.z);
+                        Vec3 direction = entity.position().subtract(creeper.position()).normalize();
+                        Vec3 velocity = new Vec3(direction.x, Config.knockbackUp, direction.z);
                         velocity = velocity.scale(knockback);
                         entity.addDeltaMovement(velocity);
                     }
