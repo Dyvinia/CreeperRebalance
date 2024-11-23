@@ -47,16 +47,17 @@ public class CreeperRebalance {
                     float power = (float) (1.0f - Math.pow(distance/radius, Config.falloffExponent));
 
                     if (power > 0) {
+                        float knockback = power;
                         if (Config.playerKnockbackMult >= 0 && entity instanceof Player)
-                            power *= Config.playerKnockbackMult;
+                            knockback *= Config.playerKnockbackMult;
                         else
-                            power *= Config.knockbackMult;
+                            knockback *= Config.knockbackMult;
 
-                        Vec3 relative = entity.position().subtract(creeper.position());
-                        relative.normalize();
-                        Vec3 knockback = new Vec3(relative.x, 0.25f, relative.z);
-                        knockback = knockback.scale(power);
-                        entity.addDeltaMovement(knockback);
+                        Vec3 direction = entity.position().subtract(creeper.position());
+                        direction.normalize();
+                        Vec3 velocity = new Vec3(direction.x, 0.25f, direction.z);
+                        velocity = velocity.scale(knockback);
+                        entity.addDeltaMovement(velocity);
                     }
                 }
             });
