@@ -5,24 +5,30 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Forge's config APIs
 @Mod.EventBusSubscriber(modid = CreeperRebalance.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class Config
-{
+public class Config {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    private static final ForgeConfigSpec.ConfigValue<Float> KNOCKBACK_MULT = BUILDER
-            .comment("How much knockback is added to the explosion")
-            .define("knockbackMult", 4.0f);
+    private static final ForgeConfigSpec.BooleanValue DISABLE_GRIEFING = BUILDER
+            .comment("\n Prevents creeper explosions from breaking blocks. \n Default: true")
+            .define("disableGriefing", true);
+    private static final ForgeConfigSpec.ConfigValue<Double> KNOCKBACK_MULT = BUILDER
+            .comment("\n Multiplier for extra knockback caused by the explosion.\n Set to 0.0 for vanilla behavior.\n Default: 4.0")
+            .define("knockbackMult", 4.0);
+    private static final ForgeConfigSpec.ConfigValue<Double> PLAYER_KNOCKBACK_MULT = BUILDER
+            .comment("\n Multiplier for extra knockback caused by the explosion to players.\n Set to -1.0 to default to the value of knockbackMult.\n Default: 3.0")
+            .define("playerKnockbackMult", 3.0);
+
+    public static boolean disableGriefing;
+    public static double knockbackMult;
+    public static double playerKnockbackMult;
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
-    public static Float knockbackMult;
-
     @SubscribeEvent
-    static void onLoad(final ModConfigEvent event)
-    {
+    static void onLoad(final ModConfigEvent event) {
+        disableGriefing = DISABLE_GRIEFING.get();
         knockbackMult = KNOCKBACK_MULT.get();
+        playerKnockbackMult = PLAYER_KNOCKBACK_MULT.get();
     }
 }
