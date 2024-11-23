@@ -44,7 +44,7 @@ public class CreeperRebalance {
                 if (event.getExplosion().getExploder() instanceof Creeper creeper) {
                     float radius = (creeper.isPowered() ? 2.0f : 1.0f) * 4.0f;
                     float distance = entity.distanceTo(creeper);
-                    float power = 1.0f - (distance/radius);
+                    float power = (float) (1.0f - Math.pow(distance/radius, Config.falloffExponent));
 
                     if (power > 0) {
                         if (Config.playerKnockbackMult >= 0 && entity instanceof Player)
