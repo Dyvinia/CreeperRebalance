@@ -10,15 +10,19 @@ disableGriefing = true
 
 # Multiplier for extra knockback caused by the explosion.
 # Set to 0.0 for vanilla behavior.
-# Default: 3.0
-knockbackMult = 3.0
+# Default: 4.0
+knockbackMult = 4.0
 
 # Multiplier for extra knockback caused by the explosion to players.
 # Set to -1.0 to default to the value of knockbackMult.
-# Default: 2.0
-playerKnockbackMult = 2.0
+# Default: 3.5
+playerKnockbackMult = 3.5
+
+# Adjusts the upward velocity added by the explosion as part of its knockback.
+# Default: 0.1
+knockbackUp = 0.1
 
 # Exponent used for calculating the falloff.
-# Default: 2.0
-falloffExponent = 2.0
+# Default: 2.5
+falloffExponent = 2.5
 ```
